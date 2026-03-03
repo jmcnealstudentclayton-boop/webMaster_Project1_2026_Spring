@@ -8,5 +8,19 @@
 <body>
     <h1>Webmaster Project 1</h1>
     <p>Spring 2026</p>
+
+    <script type="module">
+        import { supabase } from './js/supabase-config.js';
+
+        // Test Supabase connection
+        const { data, error } = await supabase.from('_test_connection').select('*').limit(1);
+        if (error && error.code === '42P01') {
+            console.log('✅ Supabase connected successfully! (No tables created yet)');
+        } else if (data) {
+            console.log('✅ Supabase connected successfully!', data);
+        } else {
+            console.error('❌ Supabase connection error:', error);
+        }
+    </script>
 </body>
 </html>

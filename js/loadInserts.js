@@ -33,7 +33,32 @@ async function loadInsert(file, placeholderId) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadInsert('nav.html', 'nav-placeholder');
+function initNav() {
+    // Resolve data-nav attributes into proper href with base path
+    const brand = document.getElementById('nav-home-brand');
+    if (brand) brand.href = BASE + '/';
+
+    document.querySelectorAll('[data-nav]').forEach(function(a) {
+        a.href = BASE + a.getAttribute('data-nav');
+    });
+
+    // Hamburger toggle
+    const btn = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    const hIcon = document.getElementById('hamburger-icon');
+    const cIcon = document.getElementById('close-icon');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+        const isOpen = !menu.classList.contains('hidden');
+        btn.setAttribute('aria-expanded', isOpen);
+        if (hIcon) hIcon.classList.toggle('hidden', isOpen);
+        if (cIcon) cIcon.classList.toggle('hidden', !isOpen);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadInsert('nav.html', 'nav-placeholder');
+    initNav();
     loadInsert('footer.html', 'footer-placeholder');
 });

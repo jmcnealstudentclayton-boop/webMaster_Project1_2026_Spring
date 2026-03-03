@@ -21,37 +21,4 @@
             <li><a data-nav="/pages/reports/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Reports</a></li>
         </ul>
     </div>
-
-    <script>
-        (function() {
-            // Resolve base path for GitHub Pages subpath hosting
-            var p = window.location.pathname;
-            var repo = 'webMaster_Project1_2026_Spring';
-            var idx = p.indexOf(repo);
-            var base = idx !== -1 ? p.substring(0, idx + repo.length) : '';
-
-            // Fix brand link
-            var brand = document.getElementById('nav-home-brand');
-            if (brand) brand.href = base + '/';
-
-            // Fix all nav links
-            document.querySelectorAll('[data-nav]').forEach(function(a) {
-                a.href = base + a.getAttribute('data-nav');
-            });
-
-            // Hamburger toggle
-            var btn = document.getElementById('nav-toggle');
-            var menu = document.getElementById('nav-menu');
-            var hIcon = document.getElementById('hamburger-icon');
-            var cIcon = document.getElementById('close-icon');
-            if (!btn || !menu) return;
-            btn.addEventListener('click', function() {
-                menu.classList.toggle('hidden');
-                var isOpen = !menu.classList.contains('hidden');
-                btn.setAttribute('aria-expanded', isOpen);
-                if (hIcon) hIcon.classList.toggle('hidden', isOpen);
-                if (cIcon) cIcon.classList.toggle('hidden', !isOpen);
-            });
-        })();
-    </script>
 </nav>

@@ -16,16 +16,16 @@ async function init() {
         .limit(8);
 
     if (error) {
-        grid.innerHTML = `<p class="text-muted">Could not load movies.</p>`;
+        grid.innerHTML = `<p class="text-slate-400">Could not load movies.</p>`;
         console.error(error);
         return;
     }
 
     grid.innerHTML = movies.map(m => `
-        <div class="card">
-            <h3>${m.title}</h3>
-            <p class="text-muted">${m.release_year ?? ''}</p>
-            <p>${(m.description ?? '').substring(0, 120)}${m.description?.length > 120 ? '…' : ''}</p>
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors">
+            <h3 class="text-lg font-semibold">${m.title}</h3>
+            <p class="text-slate-400 text-sm">${m.release_year ?? ''}</p>
+            <p class="mt-2 text-sm">${(m.description ?? '').substring(0, 120)}${m.description?.length > 120 ? '…' : ''}</p>
         </div>
     `).join('');
 }

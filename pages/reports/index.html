@@ -4,43 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports | MovieDB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
-<body>
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col font-sans">
     <div id="nav-placeholder"></div>
 
-    <main>
-        <h1 class="page-title">Reports</h1>
-        <p class="page-subtitle">Aggregated stats and insights from the movie database.</p>
+    <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-8">
+        <h1 class="text-3xl font-bold mb-2">Reports</h1>
+        <p class="text-slate-400 mb-8">Aggregated stats and insights from the movie database.</p>
 
-        <div class="card-grid">
-            <div class="card">
-                <h3>Top-Rated Movies</h3>
-                <p class="text-muted mb-2">Movies with the highest average review score.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
+                <h3 class="text-lg font-semibold mb-1">Top-Rated Movies</h3>
+                <p class="text-slate-400 text-sm mb-3">Movies with the highest average review score.</p>
                 <div id="report-top-rated">
                     <!-- Rendered by JS -->
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Most Watchlisted</h3>
-                <p class="text-muted mb-2">Movies that appear on the most watchlists.</p>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
+                <h3 class="text-lg font-semibold mb-1">Most Watchlisted</h3>
+                <p class="text-slate-400 text-sm mb-3">Movies that appear on the most watchlists.</p>
                 <div id="report-most-watchlisted">
                     <!-- Rendered by JS -->
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Genre Breakdown</h3>
-                <p class="text-muted mb-2">Number of movies per genre.</p>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
+                <h3 class="text-lg font-semibold mb-1">Genre Breakdown</h3>
+                <p class="text-slate-400 text-sm mb-3">Number of movies per genre.</p>
                 <div id="report-genre-breakdown">
                     <!-- Rendered by JS -->
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Most Active Reviewers</h3>
-                <p class="text-muted mb-2">Users who have left the most reviews.</p>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
+                <h3 class="text-lg font-semibold mb-1">Most Active Reviewers</h3>
+                <p class="text-slate-400 text-sm mb-3">Users who have left the most reviews.</p>
                 <div id="report-active-reviewers">
                     <!-- Rendered by JS -->
                 </div>

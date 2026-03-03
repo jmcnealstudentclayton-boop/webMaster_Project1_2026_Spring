@@ -115,7 +115,7 @@ async function activeReviewers() {
 }
 
 function errMsg() {
-    return `<p class="text-muted">Could not load data.</p>`;
+    return `<p class="text-slate-400">Could not load data.</p>`;
 }
 
 init();

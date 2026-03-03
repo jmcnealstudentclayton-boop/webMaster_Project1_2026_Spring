@@ -15,21 +15,21 @@ async function loadMovies(query = '') {
 
     const { data, error } = await req;
     if (error) {
-        grid.innerHTML = `<p class="text-muted">Error loading movies.</p>`;
+        grid.innerHTML = `<p class="text-slate-400">Error loading movies.</p>`;
         console.error(error);
         return;
     }
 
     if (!data.length) {
-        grid.innerHTML = `<p class="text-muted">No movies found.</p>`;
+        grid.innerHTML = `<p class="text-slate-400">No movies found.</p>`;
         return;
     }
 
     grid.innerHTML = data.map(m => `
-        <div class="card">
-            <h3>${m.title}</h3>
-            <p class="text-muted">${m.release_year ?? ''} &middot; ${m.runtime_minutes ?? '?'} min</p>
-            <p>${(m.description ?? '').substring(0, 150)}${m.description?.length > 150 ? '…' : ''}</p>
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors">
+            <h3 class="text-lg font-semibold">${m.title}</h3>
+            <p class="text-slate-400 text-sm">${m.release_year ?? ''} &middot; ${m.runtime_minutes ?? '?'} min</p>
+            <p class="mt-2 text-sm">${(m.description ?? '').substring(0, 150)}${m.description?.length > 150 ? '…' : ''}</p>
         </div>
     `).join('');
 }

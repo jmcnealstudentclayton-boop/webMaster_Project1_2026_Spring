@@ -4,38 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieDB | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col font-sans">
     <div id="nav-placeholder"></div>
 
-    <main>
-        <h1 class="page-title">Welcome to MovieDB</h1>
-        <p class="page-subtitle">Browse movies, write reviews, and manage your watchlist — all powered by Supabase.</p>
+    <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-8">
+        <h1 class="text-3xl font-bold mb-2">Welcome to MovieDB</h1>
+        <p class="text-slate-400 mb-8">Browse movies, write reviews, and manage your watchlist — all powered by Supabase.</p>
 
         <!-- Quick links -->
-        <div class="card-grid mb-3">
-            <a href="pages/movies/" class="card" style="text-decoration:none;color:inherit;">
-                <h3>Browse Movies</h3>
-                <p class="text-muted">Search and explore our collection of 200+ movies.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+            <a href="pages/movies/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
+                <h3 class="text-lg font-semibold mb-1">Browse Movies</h3>
+                <p class="text-slate-400 text-sm">Search and explore our collection of 200+ movies.</p>
             </a>
-            <a href="pages/reviews/" class="card" style="text-decoration:none;color:inherit;">
-                <h3>Leave a Review</h3>
-                <p class="text-muted">Rate and review the movies you've watched.</p>
+            <a href="pages/reviews/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
+                <h3 class="text-lg font-semibold mb-1">Leave a Review</h3>
+                <p class="text-slate-400 text-sm">Rate and review the movies you've watched.</p>
             </a>
-            <a href="pages/watchlist/" class="card" style="text-decoration:none;color:inherit;">
-                <h3>My Watchlist</h3>
-                <p class="text-muted">Keep track of movies you want to see.</p>
+            <a href="pages/watchlist/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
+                <h3 class="text-lg font-semibold mb-1">My Watchlist</h3>
+                <p class="text-slate-400 text-sm">Keep track of movies you want to see.</p>
             </a>
-            <a href="pages/reports/" class="card" style="text-decoration:none;color:inherit;">
-                <h3>Reports</h3>
-                <p class="text-muted">View aggregated stats and insights.</p>
+            <a href="pages/reports/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
+                <h3 class="text-lg font-semibold mb-1">Reports</h3>
+                <p class="text-slate-400 text-sm">View aggregated stats and insights.</p>
             </a>
         </div>
 
         <!-- Featured movies -->
-        <h2>Featured Movies</h2>
-        <div id="featured-grid" class="card-grid mt-2">
+        <h2 class="text-2xl font-bold mb-4">Featured Movies</h2>
+        <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <!-- Rendered by JS -->
         </div>
     </main>

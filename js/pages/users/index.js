@@ -41,8 +41,9 @@ async function init() {
     }
 
     /* ── Render header ──────────────────────────── */
-    document.title = `${user.username} | MovieDB`;
-    document.getElementById('user-name').textContent = user.username;
+    const displayName = `${user.first_name} ${user.last_name}`;
+    document.title = `${displayName} | MovieDB`;
+    document.getElementById('user-name').textContent = displayName;
 
     const metaEl = document.getElementById('user-meta');
     const metaParts = [];
@@ -66,7 +67,7 @@ async function init() {
             .from('watchlist')
             .select('*, movies(title, movie_id)')
             .eq('user_id', user.user_id)
-            .order('added_date', { ascending: false }),
+            .order('date_added', { ascending: false }),
     ]);
 
     const reviews = revRes.data || [];
@@ -116,7 +117,7 @@ async function init() {
                 <td class="px-4 py-3">
                     <a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a>
                 </td>
-                <td class="px-4 py-3 text-slate-400">${esc(w.added_date)}</td>
+                <td class="px-4 py-3 text-slate-400">${esc(w.date_added)}</td>
                 <td class="px-4 py-3">${w.watched
                     ? '<span class="text-green-400">✔ Watched</span>'
                     : '<span class="text-slate-400">Pending</span>'}</td>

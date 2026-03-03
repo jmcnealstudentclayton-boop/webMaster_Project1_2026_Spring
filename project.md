@@ -15,10 +15,10 @@
 
 | Table          | Rows  | Description                          |
 |----------------|-------|--------------------------------------|
-| `movies`       | 200   | Title, year, runtime, description    |
+| `movies`       | 200   | Title, year, runtime, director, rated, description, IMDb rating, poster URL |
 | `genres`       | 16    | Genre names                          |
 | `movie_genres` | 607   | Many-to-many link (movie ↔ genre)    |
-| `users`        | 50    | Username, email, join date, sub type |
+| `users`        | 50    | First/last name, email, join date, subscription type |
 | `reviews`      | 1,348 | User ratings & text reviews          |
 | `watchlist`    | 2,245 | User watchlist entries (watched flag) |
 

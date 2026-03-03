@@ -54,7 +54,7 @@ async function init() {
     document.title = `${movie.title} | MovieDB`;
     document.getElementById('movie-title').textContent = movie.title;
     document.getElementById('movie-meta').textContent =
-        `${movie.release_year ?? 'Unknown year'} · ${movie.runtime_minutes ?? '?'} min`;
+        `${movie.release_year ?? 'Unknown year'} · ${movie.runtime ?? '?'} min`;
     document.getElementById('movie-desc').textContent = movie.description ?? '';
     document.getElementById('movie-genres').innerHTML = genres.length
         ? genres.map(g => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 text-xs rounded-full">${esc(g)}</span>`).join('')
@@ -67,7 +67,7 @@ async function init() {
     /* ── Fetch reviews ──────────────────────────── */
     const { data: reviews } = await supabase
         .from('reviews')
-        .select('*, users(username, user_id)')
+        .select('*, users(first_name, last_name, user_id)')
         .eq('movie_id', movie.movie_id)
         .order('review_date', { ascending: false });
 
@@ -85,7 +85,7 @@ async function init() {
     list.innerHTML = reviews.map(r => `
         <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
             <div class="flex items-center justify-between mb-2">
-                <a href="${base}/pages/users/?id=${r.users?.user_id}" class="text-indigo-400 hover:text-indigo-300 font-medium">${esc(r.users?.username)}</a>
+                <a href="${base}/pages/users/?id=${r.users?.user_id}" class="text-indigo-400 hover:text-indigo-300 font-medium">${esc(r.users?.first_name + ' ' + r.users?.last_name)}</a>
                 <span class="text-yellow-400 font-semibold">${r.rating}/10</span>
             </div>
             <p class="text-sm text-slate-300">${esc(r.review_text)}</p>

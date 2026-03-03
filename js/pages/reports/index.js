@@ -122,13 +122,13 @@ async function activeReviewers() {
 
     const { data, error } = await supabase
         .from('reviews')
-        .select('user_id, users(username)');
+        .select('user_id, users(first_name, last_name)');
 
     if (error) { el.innerHTML = errMsg(); return; }
 
     const counts = {};
     data.forEach(r => {
-        const u = r.users?.username ?? 'Unknown';
+        const u = r.users ? `${r.users.first_name} ${r.users.last_name}` : 'Unknown';
         counts[u] = (counts[u] || 0) + 1;
     });
 

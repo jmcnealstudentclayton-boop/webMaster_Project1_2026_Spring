@@ -45,7 +45,7 @@ export async function renderReviews(query = '') {
     try {
         const { data, error } = await supabase
             .from('reviews')
-            .select('*, movies(title, movie_id), users(username, user_id)')
+            .select('*, movies(title, movie_id), users(first_name, last_name, user_id)')
             .order('review_date', { ascending: false });
 
         spinner?.classList.add('hidden');
@@ -56,13 +56,13 @@ export async function renderReviews(query = '') {
             return;
         }
 
-        // Client-side filter by movie title or username
+        // Client-side filter by movie title or user name
         cachedData = data || [];
         if (query) {
             const q = query.toLowerCase();
             cachedData = cachedData.filter(r =>
                 (r.movies?.title ?? '').toLowerCase().includes(q) ||
-                (r.users?.username ?? '').toLowerCase().includes(q)
+                ((r.users?.first_name ?? '') + ' ' + (r.users?.last_name ?? '')).toLowerCase().includes(q)
             );
         }
 
@@ -85,7 +85,7 @@ export async function renderReviews(query = '') {
                     <span><a href="${base}/pages/movies/detail.html?id=${r.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300 font-semibold">${esc(r.movies?.title)}</a></span>
                     <span class="text-yellow-400 font-semibold">${r.rating}/10</span>
                 </div>
-                <p class="text-slate-400 text-sm mt-1">by <a href="${base}/pages/users/?id=${r.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(r.users?.username)}</a></p>
+                <p class="text-slate-400 text-sm mt-1">by <a href="${base}/pages/users/?id=${r.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(r.users?.first_name + ' ' + r.users?.last_name)}</a></p>
                 <p class="mt-2 text-sm">${esc(r.review_text)}</p>
                 <small class="text-slate-500">${esc(r.review_date)}</small>
             </div>

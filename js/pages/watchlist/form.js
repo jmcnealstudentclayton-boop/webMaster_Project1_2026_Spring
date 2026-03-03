@@ -23,11 +23,11 @@ export async function populateUserFilter() {
     const userSel = document.getElementById('wl-user-filter');
     if (!userSel) return;
 
-    const { data } = await supabase.from('users').select('user_id, username').order('username');
+    const { data } = await supabase.from('users').select('user_id, first_name, last_name').order('last_name');
     data?.forEach(u => {
         const opt = document.createElement('option');
         opt.value = u.user_id;
-        opt.textContent = u.username;
+        opt.textContent = `${u.first_name} ${u.last_name}`;
         userSel.appendChild(opt);
     });
 }
@@ -47,8 +47,8 @@ export async function loadWatchlist() {
 
     let req = supabase
         .from('watchlist')
-        .select('*, movies(title, movie_id), users(username, user_id)', { count: 'exact' })
-        .order('added_date', { ascending: false })
+        .select('*, movies(title, movie_id), users(first_name, last_name, user_id)', { count: 'exact' })
+        .order('date_added', { ascending: false })
         .limit(100);
 
     if (userId) req = req.eq('user_id', Number(userId));
@@ -76,9 +76,9 @@ export async function loadWatchlist() {
     const base = basePath();
     tbody.innerHTML = data.map(w => `
         <tr class="border-b border-slate-700">
-            <td class="px-4 py-3"><a href="${base}/pages/users/?id=${w.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.users?.username)}</a></td>
+            <td class="px-4 py-3"><a href="${base}/pages/users/?id=${w.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.users?.first_name + ' ' + w.users?.last_name)}</a></td>
             <td class="px-4 py-3"><a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a></td>
-            <td class="px-4 py-3 text-slate-400">${esc(w.added_date)}</td>
+            <td class="px-4 py-3 text-slate-400">${esc(w.date_added)}</td>
             <td class="px-4 py-3">${w.watched ? '<span class="text-green-400">✔ Watched</span>' : '<span class="text-slate-400">Pending</span>'}</td>
         </tr>
     `).join('');

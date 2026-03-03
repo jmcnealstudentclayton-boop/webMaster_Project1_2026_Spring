@@ -30,6 +30,7 @@
 ROOT/
 ├── index.html                        Home page
 ├── project.md                        This roadmap
+├── README.md                         Project README
 ├── css/
 │   └── styles.css                    Global stylesheet
 ├── js/
@@ -37,20 +38,25 @@ ROOT/
 │   ├── loadInserts.js                Fetches nav & footer inserts
 │   └── pages/
 │       ├── home/index.js             Home page logic
-│       ├── movies/index.js           Browse/search movies
+│       ├── movies/
+│       │   ├── index.js              Browse/search movies
+│       │   └── detail.js             Movie detail page
 │       ├── reviews/
-│       │   ├── index.js              Page init & form submit
-│       │   ├── form.js               Populate select dropdowns
+│       │   ├── index.js              Page init & search wiring
 │       │   └── review.js             Render review cards
 │       ├── watchlist/
-│       │   ├── index.js              Page init & add handler
+│       │   ├── index.js              Page init & filter wiring
 │       │   └── form.js               Populate selects & render table
+│       ├── users/index.js            User profile page
 │       └── reports/index.js          Aggregate report queries
 ├── pages/
-│   ├── movies/index.html
-│   ├── reviews/index.html
-│   ├── watchlist/index.html
-│   └── reports/index.html
+│   ├── movies/
+│   │   ├── index.html                Browse movies page
+│   │   └── detail.html               Movie detail page
+│   ├── reviews/index.html            Reviews list page
+│   ├── watchlist/index.html          Watchlist page
+│   ├── users/index.html              User profile page
+│   └── reports/index.html            Reports page
 └── pageInserts/
     ├── nav.html                      Shared navigation bar
     └── footer.html                   Shared footer
@@ -92,18 +98,18 @@ ROOT/
 
 ### Milestone 3 — Reports, Detail Views & Polish  *(Due: May 4)*
 
-| #  | Task                                          | Status      |
-|----|-----------------------------------------------|-------------|
-| 21 | Top-Rated Movies report (live data)             | 🔲 To Do    |
-| 22 | Most-Watchlisted report (live data)             | 🔲 To Do    |
-| 23 | Genre Breakdown report (live data)              | 🔲 To Do    |
-| 24 | Most Active Reviewers report (live data)        | 🔲 To Do    |
-| 25 | Movie detail page (all reviews for one movie)  | 🔲 To Do    |
-| 26 | User profile page (reviews + watchlist)         | 🔲 To Do    |
-| 27 | Responsive polish & mobile nav                  | 🔲 To Do    |
-| 28 | Accessibility review (ARIA, contrast, focus)    | 🔲 To Do    |
-| 29 | Final styling pass & animations                 | 🔲 To Do    |
-| 30 | README with setup instructions                  | 🔲 To Do    |
+| #  | Task                                          | Status |
+|----|-----------------------------------------------|--------|
+| 21 | Top-Rated Movies report (live data)             | ✅ Done |
+| 22 | Most-Watchlisted report (live data)             | ✅ Done |
+| 23 | Genre Breakdown report (live data)              | ✅ Done |
+| 24 | Most Active Reviewers report (live data)        | ✅ Done |
+| 25 | Movie detail page (all reviews for one movie)  | ✅ Done |
+| 26 | User profile page (reviews + watchlist)         | ✅ Done |
+| 27 | Responsive polish & mobile nav                  | ✅ Done |
+| 28 | Accessibility review (ARIA, contrast, focus)    | ✅ Done |
+| 29 | Final styling pass & animations                 | ✅ Done |
+| 30 | README with setup instructions                  | ✅ Done |
 
 ---
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | MovieDB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col font-sans">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="nav-placeholder"></div>
+
+    <main id="main-content" class="flex-1 max-w-6xl w-full mx-auto px-6 py-8" role="main">
+        <!-- Loading spinner -->
+        <div id="profile-spinner" class="flex justify-center py-12">
+            <div class="w-8 h-8 border-4 border-slate-600 border-t-indigo-500 rounded-full animate-spin"></div>
+        </div>
+
+        <!-- User header -->
+        <div id="user-header" class="hidden mb-8">
+            <h1 id="user-name" class="text-3xl font-bold mb-1"></h1>
+            <div id="user-meta" class="flex flex-wrap gap-4 text-slate-400 text-sm"></div>
+        </div>
+
+        <!-- Stats bar -->
+        <div id="stats-bar" class="hidden grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center">
+                <p id="stat-reviews" class="text-2xl font-bold text-indigo-400">0</p>
+                <p class="text-slate-400 text-xs uppercase tracking-wide">Reviews</p>
+            </div>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center">
+                <p id="stat-avg" class="text-2xl font-bold text-yellow-400">—</p>
+                <p class="text-slate-400 text-xs uppercase tracking-wide">Avg Rating</p>
+            </div>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center">
+                <p id="stat-watchlist" class="text-2xl font-bold text-indigo-400">0</p>
+                <p class="text-slate-400 text-xs uppercase tracking-wide">Watchlist</p>
+            </div>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center">
+                <p id="stat-watched" class="text-2xl font-bold text-green-400">0</p>
+                <p class="text-slate-400 text-xs uppercase tracking-wide">Watched</p>
+            </div>
+        </div>
+
+        <!-- Reviews section -->
+        <section id="reviews-section" class="hidden mb-10">
+            <h2 class="text-2xl font-bold mb-4">Reviews</h2>
+            <div id="user-reviews" class="space-y-4">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- Watchlist section -->
+        <section id="watchlist-section" class="hidden">
+            <h2 class="text-2xl font-bold mb-4">Watchlist</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Movie</th>
+                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Added</th>
+                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-watchlist">
+                        <!-- Rendered by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../js/loadInserts.js"></script>
+    <script type="module" src="../../js/pages/users/index.js"></script>
+</body>
+</html>

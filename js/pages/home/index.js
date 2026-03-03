@@ -33,11 +33,11 @@ async function init() {
     }
 
     grid.innerHTML = movies.map(m => `
-        <div class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors">
+        <a href="pages/movies/detail.html?id=${m.movie_id}" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors block no-underline text-inherit card-lift animate-fade-in">
             <h3 class="text-lg font-semibold">${esc(m.title)}</h3>
             <p class="text-slate-400 text-sm">${esc(String(m.release_year ?? ''))}</p>
             <p class="mt-2 text-sm">${esc((m.description ?? '').substring(0, 120))}${(m.description?.length ?? 0) > 120 ? '…' : ''}</p>
-        </div>
+        </a>
     `).join('');
 }
 

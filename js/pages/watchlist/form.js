@@ -11,6 +11,14 @@ function esc(str) {
     return d.innerHTML;
 }
 
+// ---- Base path for cross-page links ----
+function basePath() {
+    const p = window.location.pathname;
+    const repo = 'webMaster_Project1_2026_Spring';
+    const i = p.indexOf(repo);
+    return i !== -1 ? p.substring(0, i + repo.length) : '';
+}
+
 export async function populateUserFilter() {
     const userSel = document.getElementById('wl-user-filter');
     if (!userSel) return;
@@ -39,7 +47,7 @@ export async function loadWatchlist() {
 
     let req = supabase
         .from('watchlist')
-        .select('*, movies(title), users(username)', { count: 'exact' })
+        .select('*, movies(title, movie_id), users(username, user_id)', { count: 'exact' })
         .order('added_date', { ascending: false })
         .limit(100);
 
@@ -65,10 +73,11 @@ export async function loadWatchlist() {
         return;
     }
 
+    const base = basePath();
     tbody.innerHTML = data.map(w => `
         <tr class="border-b border-slate-700">
-            <td class="px-4 py-3">${esc(w.users?.username)}</td>
-            <td class="px-4 py-3">${esc(w.movies?.title)}</td>
+            <td class="px-4 py-3"><a href="${base}/pages/users/?id=${w.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.users?.username)}</a></td>
+            <td class="px-4 py-3"><a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a></td>
             <td class="px-4 py-3 text-slate-400">${esc(w.added_date)}</td>
             <td class="px-4 py-3">${w.watched ? '<span class="text-green-400">✔ Watched</span>' : '<span class="text-slate-400">Pending</span>'}</td>
         </tr>

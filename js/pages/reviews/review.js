@@ -15,6 +15,14 @@ function esc(str) {
     return d.innerHTML;
 }
 
+// ---- Base path for cross-page links ----
+function basePath() {
+    const p = window.location.pathname;
+    const repo = 'webMaster_Project1_2026_Spring';
+    const i = p.indexOf(repo);
+    return i !== -1 ? p.substring(0, i + repo.length) : '';
+}
+
 export async function renderReviews(query = '') {
     const container = document.getElementById('reviews-list');
     const spinner   = document.getElementById('review-spinner');
@@ -37,7 +45,7 @@ export async function renderReviews(query = '') {
     try {
         const { data, error } = await supabase
             .from('reviews')
-            .select('*, movies(title), users(username)')
+            .select('*, movies(title, movie_id), users(username, user_id)')
             .order('review_date', { ascending: false });
 
         spinner?.classList.add('hidden');
@@ -70,10 +78,14 @@ export async function renderReviews(query = '') {
         const from = (currentPage - 1) * PAGE_SIZE;
         const page = cachedData.slice(from, from + PAGE_SIZE);
 
+        const base = basePath();
         container.innerHTML = page.map(r => `
             <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
-                <strong>${esc(r.movies?.title)}</strong>
-                <span class="text-slate-400"> — ${r.rating}/10 by ${esc(r.users?.username)}</span>
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <span><a href="${base}/pages/movies/detail.html?id=${r.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300 font-semibold">${esc(r.movies?.title)}</a></span>
+                    <span class="text-yellow-400 font-semibold">${r.rating}/10</span>
+                </div>
+                <p class="text-slate-400 text-sm mt-1">by <a href="${base}/pages/users/?id=${r.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(r.users?.username)}</a></p>
                 <p class="mt-2 text-sm">${esc(r.review_text)}</p>
                 <small class="text-slate-500">${esc(r.review_date)}</small>
             </div>

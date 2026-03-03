@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body class="bg-slate-900 text-slate-200 min-h-screen flex flex-col font-sans">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="nav-placeholder"></div>
 
-    <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-8">
+    <main id="main-content" class="flex-1 max-w-6xl w-full mx-auto px-6 py-8" role="main">
         <h1 class="text-3xl font-bold mb-2">Watchlist</h1>
         <p class="text-slate-400 mb-6">Browse all user watchlist entries.</p>
 
         <!-- Filter bar -->
         <div class="flex flex-wrap gap-4 mb-6">
             <select id="wl-user-filter"
+                    aria-label="Filter by user"
                     class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
                 <option value="">All Users</option>
             </select>
             <select id="wl-status-filter"
+                    aria-label="Filter by status"
                     class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
                 <option value="">All Statuses</option>
                 <option value="watched">Watched</option>

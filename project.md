@@ -78,17 +78,17 @@ ROOT/
 
 ### Milestone 2 — Interactivity & Filtering  *(Due: April 5)*
 
-| #  | Task                                          | Status      |
-|----|-----------------------------------------------|-------------|
-| 12 | Pagination for movie browse                    | 🔲 To Do    |
-| 13 | Genre filter dropdown on movies page            | 🔲 To Do    |
-| 14 | Sort movies by title / year / runtime           | 🔲 To Do    |
-| 15 | Search reviews by movie title or username       | 🔲 To Do    |
-| 16 | Pagination for reviews list                     | 🔲 To Do    |
-| 17 | Filter watchlist by watched / pending status    | 🔲 To Do    |
-| 18 | Loading spinners during async operations        | 🔲 To Do    |
-| 19 | XSS-safe rendering (escape user content)        | 🔲 To Do    |
-| 20 | Toast / inline notifications for empty results  | 🔲 To Do    |
+| #  | Task                                          | Status |
+|----|-----------------------------------------------|--------|
+| 12 | Pagination for movie browse                    | ✅ Done |
+| 13 | Genre filter dropdown on movies page            | ✅ Done |
+| 14 | Sort movies by title / year / runtime           | ✅ Done |
+| 15 | Search reviews by movie title or username       | ✅ Done |
+| 16 | Pagination for reviews list                     | ✅ Done |
+| 17 | Filter watchlist by watched / pending status    | ✅ Done |
+| 18 | Loading spinners during async operations        | ✅ Done |
+| 19 | XSS-safe rendering (escape user content)        | ✅ Done |
+| 20 | Toast / inline notifications for empty results  | ✅ Done |
 
 ### Milestone 3 — Reports, Detail Views & Polish  *(Due: May 4)*
 

@@ -1,8 +1,15 @@
 /**
  * js/pages/watchlist/form.js
- * Populate user filter and render the watchlist table (read-only)
+ * Populate user filter and render the watchlist table (read-only, XSS-safe)
  */
 import { supabase } from '../../supabase-config.js';
+
+// ---- XSS helper ----
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str ?? '';
+    return d.innerHTML;
+}
 
 export async function populateUserFilter() {
     const userSel = document.getElementById('wl-user-filter');
@@ -18,15 +25,21 @@ export async function populateUserFilter() {
 }
 
 export async function loadWatchlist() {
-    const tbody = document.getElementById('watchlist-body');
+    const tbody   = document.getElementById('watchlist-body');
+    const spinner = document.getElementById('wl-spinner');
+    const countEl = document.getElementById('wl-count');
     if (!tbody) return;
+
+    spinner?.classList.remove('hidden');
+    tbody.innerHTML = '';
+    if (countEl) countEl.textContent = '';
 
     const userId = document.getElementById('wl-user-filter')?.value;
     const status = document.getElementById('wl-status-filter')?.value;
 
     let req = supabase
         .from('watchlist')
-        .select('*, movies(title), users(username)')
+        .select('*, movies(title), users(username)', { count: 'exact' })
         .order('added_date', { ascending: false })
         .limit(100);
 
@@ -34,7 +47,9 @@ export async function loadWatchlist() {
     if (status === 'watched') req = req.eq('watched', true);
     if (status === 'pending') req = req.eq('watched', false);
 
-    const { data, error } = await req;
+    const { data, error, count } = await req;
+
+    spinner?.classList.add('hidden');
 
     if (error) {
         tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-3 text-slate-400">Error loading watchlist.</td></tr>`;
@@ -42,16 +57,19 @@ export async function loadWatchlist() {
         return;
     }
 
-    if (!data.length) {
+    const total = count ?? (data?.length ?? 0);
+    if (countEl) countEl.textContent = `${total} entr${total !== 1 ? 'ies' : 'y'} found`;
+
+    if (!data?.length) {
         tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-3 text-slate-400">No entries found.</td></tr>`;
         return;
     }
 
     tbody.innerHTML = data.map(w => `
         <tr class="border-b border-slate-700">
-            <td class="px-4 py-3">${w.users?.username ?? 'Unknown'}</td>
-            <td class="px-4 py-3">${w.movies?.title ?? 'Unknown'}</td>
-            <td class="px-4 py-3 text-slate-400">${w.added_date ?? ''}</td>
+            <td class="px-4 py-3">${esc(w.users?.username)}</td>
+            <td class="px-4 py-3">${esc(w.movies?.title)}</td>
+            <td class="px-4 py-3 text-slate-400">${esc(w.added_date)}</td>
             <td class="px-4 py-3">${w.watched ? '<span class="text-green-400">✔ Watched</span>' : '<span class="text-slate-400">Pending</span>'}</td>
         </tr>
     `).join('');

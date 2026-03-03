@@ -21,12 +21,12 @@
                 <p class="text-slate-400 text-sm">Search and explore our collection of 200+ movies.</p>
             </a>
             <a href="pages/reviews/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
-                <h3 class="text-lg font-semibold mb-1">Leave a Review</h3>
-                <p class="text-slate-400 text-sm">Rate and review the movies you've watched.</p>
+                <h3 class="text-lg font-semibold mb-1">Reviews</h3>
+                <p class="text-slate-400 text-sm">Browse community ratings and reviews.</p>
             </a>
             <a href="pages/watchlist/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
-                <h3 class="text-lg font-semibold mb-1">My Watchlist</h3>
-                <p class="text-slate-400 text-sm">Keep track of movies you want to see.</p>
+                <h3 class="text-lg font-semibold mb-1">Watchlist</h3>
+                <p class="text-slate-400 text-sm">See what users are watching.</p>
             </a>
             <a href="pages/reports/" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors no-underline text-inherit">
                 <h3 class="text-lg font-semibold mb-1">Reports</h3>
@@ -36,6 +36,9 @@
 
         <!-- Featured movies -->
         <h2 class="text-2xl font-bold mb-4">Featured Movies</h2>
+        <div id="home-spinner" class="hidden flex justify-center py-12">
+            <div class="w-8 h-8 border-4 border-slate-600 border-t-indigo-500 rounded-full animate-spin"></div>
+        </div>
         <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <!-- Rendered by JS -->
         </div>

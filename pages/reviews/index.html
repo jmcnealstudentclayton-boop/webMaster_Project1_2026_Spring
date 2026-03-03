@@ -20,9 +20,21 @@
                    class="w-full sm:w-96 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
         </div>
 
+        <!-- Loading spinner -->
+        <div id="review-spinner" class="hidden flex justify-center py-12">
+            <div class="w-8 h-8 border-4 border-slate-600 border-t-indigo-500 rounded-full animate-spin"></div>
+        </div>
+
+        <!-- Results count -->
+        <p id="review-count" class="text-slate-400 text-sm mb-4"></p>
+
         <!-- Reviews List -->
         <div id="reviews-list" class="space-y-4">
             <!-- Reviews rendered by JS -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="review-pagination" class="flex items-center justify-center gap-4 mt-8">
         </div>
     </main>
 

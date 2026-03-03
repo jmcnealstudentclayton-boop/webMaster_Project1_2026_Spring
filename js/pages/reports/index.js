@@ -1,9 +1,23 @@
 /**
  * js/pages/reports/index.js
  * Reports page — aggregate queries for insights
+ * XSS-safe + inline spinners
  */
 import { supabase } from '../../supabase-config.js';
 
+/* ── XSS helper ─────────────────────────────── */
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str ?? '';
+    return d.innerHTML;
+}
+
+/* ── Spinner helpers ─────────────────────────── */
+const spinnerHTML = '<div class="flex justify-center py-4"><div class="w-6 h-6 border-4 border-slate-600 border-t-indigo-500 rounded-full animate-spin"></div></div>';
+
+function showSpinner(el) { el.innerHTML = spinnerHTML; }
+
+/* ── Init ────────────────────────────────────── */
 async function init() {
     await Promise.all([
         topRated(),
@@ -13,9 +27,11 @@ async function init() {
     ]);
 }
 
+/* ── Top Rated Movies ────────────────────────── */
 async function topRated() {
     const el = document.getElementById('report-top-rated');
     if (!el) return;
+    showSpinner(el);
 
     const { data, error } = await supabase
         .from('reviews')
@@ -23,7 +39,6 @@ async function topRated() {
 
     if (error) { el.innerHTML = errMsg(); return; }
 
-    // Aggregate average ratings
     const map = {};
     data.forEach(r => {
         if (!map[r.movie_id]) map[r.movie_id] = { title: r.movies?.title, sum: 0, count: 0 };
@@ -36,14 +51,18 @@ async function topRated() {
         .sort((a, b) => b.avg - a.avg)
         .slice(0, 10);
 
-    el.innerHTML = sorted.map((m, i) =>
-        `<p>${i + 1}. <strong>${m.title}</strong> — ${m.avg}/10 (${m.count} reviews)</p>`
-    ).join('');
+    el.innerHTML = sorted.length
+        ? sorted.map((m, i) =>
+            `<p>${i + 1}. <strong>${esc(m.title)}</strong> — ${m.avg}/10 (${m.count} reviews)</p>`
+          ).join('')
+        : '<p class="text-slate-400">No review data found.</p>';
 }
 
+/* ── Most Watchlisted ────────────────────────── */
 async function mostWatchlisted() {
     const el = document.getElementById('report-most-watchlisted');
     if (!el) return;
+    showSpinner(el);
 
     const { data, error } = await supabase
         .from('watchlist')
@@ -61,14 +80,18 @@ async function mostWatchlisted() {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
 
-    el.innerHTML = sorted.map(([title, n], i) =>
-        `<p>${i + 1}. <strong>${title}</strong> — ${n} users</p>`
-    ).join('');
+    el.innerHTML = sorted.length
+        ? sorted.map(([title, n], i) =>
+            `<p>${i + 1}. <strong>${esc(title)}</strong> — ${n} users</p>`
+          ).join('')
+        : '<p class="text-slate-400">No watchlist data found.</p>';
 }
 
+/* ── Genre Breakdown ─────────────────────────── */
 async function genreBreakdown() {
     const el = document.getElementById('report-genre-breakdown');
     if (!el) return;
+    showSpinner(el);
 
     const { data, error } = await supabase
         .from('movie_genres')
@@ -84,14 +107,18 @@ async function genreBreakdown() {
 
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
 
-    el.innerHTML = sorted.map(([genre, n]) =>
-        `<p><strong>${genre}</strong> — ${n} movies</p>`
-    ).join('');
+    el.innerHTML = sorted.length
+        ? sorted.map(([genre, n]) =>
+            `<p><strong>${esc(genre)}</strong> — ${n} movies</p>`
+          ).join('')
+        : '<p class="text-slate-400">No genre data found.</p>';
 }
 
+/* ── Active Reviewers ────────────────────────── */
 async function activeReviewers() {
     const el = document.getElementById('report-active-reviewers');
     if (!el) return;
+    showSpinner(el);
 
     const { data, error } = await supabase
         .from('reviews')
@@ -109,13 +136,16 @@ async function activeReviewers() {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
 
-    el.innerHTML = sorted.map(([user, n], i) =>
-        `<p>${i + 1}. <strong>${user}</strong> — ${n} reviews</p>`
-    ).join('');
+    el.innerHTML = sorted.length
+        ? sorted.map(([user, n], i) =>
+            `<p>${i + 1}. <strong>${esc(user)}</strong> — ${n} reviews</p>`
+          ).join('')
+        : '<p class="text-slate-400">No reviewer data found.</p>';
 }
 
+/* ── Error fallback ──────────────────────────── */
 function errMsg() {
-    return `<p class="text-slate-400">Could not load data.</p>`;
+    return '<p class="text-slate-400">Could not load data.</p>';
 }
 
 init();

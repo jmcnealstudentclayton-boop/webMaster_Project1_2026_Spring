@@ -1,6 +1,6 @@
 <nav class="bg-slate-800 border-b border-slate-700 px-6 py-3 sticky top-0 z-50" aria-label="Main navigation">
     <div class="max-w-6xl mx-auto flex items-center justify-between flex-wrap gap-3">
-        <a href="/" class="text-xl font-bold text-indigo-500 hover:text-indigo-400 no-underline" aria-label="MovieDB Home">MovieDB</a>
+        <a href="/" id="nav-home-brand" class="text-xl font-bold text-indigo-500 hover:text-indigo-400 no-underline" aria-label="MovieDB Home">MovieDB</a>
 
         <!-- Hamburger button (mobile) -->
         <button id="nav-toggle" type="button"
@@ -14,28 +14,43 @@
 
         <!-- Nav links -->
         <ul id="nav-menu" class="hidden sm:flex gap-6 list-none flex-wrap w-full sm:w-auto">
-            <li><a href="/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Home</a></li>
-            <li><a href="/pages/movies/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Browse Movies</a></li>
-            <li><a href="/pages/reviews/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Reviews</a></li>
-            <li><a href="/pages/watchlist/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Watchlist</a></li>
-            <li><a href="/pages/reports/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Reports</a></li>
+            <li><a data-nav="/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Home</a></li>
+            <li><a data-nav="/pages/movies/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Browse Movies</a></li>
+            <li><a data-nav="/pages/reviews/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Reviews</a></li>
+            <li><a data-nav="/pages/watchlist/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Watchlist</a></li>
+            <li><a data-nav="/pages/reports/" class="block py-2 sm:py-0 text-slate-400 hover:text-slate-200 text-sm transition-colors no-underline">Reports</a></li>
         </ul>
     </div>
 
     <script>
         (function() {
-            const btn = document.getElementById('nav-toggle');
-            const menu = document.getElementById('nav-menu');
-            const hIcon = document.getElementById('hamburger-icon');
-            const cIcon = document.getElementById('close-icon');
+            // Resolve base path for GitHub Pages subpath hosting
+            var p = window.location.pathname;
+            var repo = 'webMaster_Project1_2026_Spring';
+            var idx = p.indexOf(repo);
+            var base = idx !== -1 ? p.substring(0, idx + repo.length) : '';
+
+            // Fix brand link
+            var brand = document.getElementById('nav-home-brand');
+            if (brand) brand.href = base + '/';
+
+            // Fix all nav links
+            document.querySelectorAll('[data-nav]').forEach(function(a) {
+                a.href = base + a.getAttribute('data-nav');
+            });
+
+            // Hamburger toggle
+            var btn = document.getElementById('nav-toggle');
+            var menu = document.getElementById('nav-menu');
+            var hIcon = document.getElementById('hamburger-icon');
+            var cIcon = document.getElementById('close-icon');
             if (!btn || !menu) return;
-            btn.addEventListener('click', () => {
-                const open = menu.classList.toggle('hidden');
-                // 'open' is true when we just hid it (toggle returns className presence after toggle)
-                const isOpen = !menu.classList.contains('hidden');
+            btn.addEventListener('click', function() {
+                menu.classList.toggle('hidden');
+                var isOpen = !menu.classList.contains('hidden');
                 btn.setAttribute('aria-expanded', isOpen);
-                hIcon?.classList.toggle('hidden', isOpen);
-                cIcon?.classList.toggle('hidden', !isOpen);
+                if (hIcon) hIcon.classList.toggle('hidden', isOpen);
+                if (cIcon) cIcon.classList.toggle('hidden', !isOpen);
             });
         })();
     </script>

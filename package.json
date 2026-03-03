@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jmcnealstudentclayton-boop/webMaster_Project1_2026_Spring#readme",
   "dependencies": {
-    "@supabase/supabase-js": "^2.98.0"
+    "@supabase/supabase-js": "^2.98.0",
+    "pg": "^8.19.0"
   }
 }

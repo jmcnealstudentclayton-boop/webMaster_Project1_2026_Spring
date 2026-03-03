@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | MovieDB</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <h1 class="page-title">Leave a Review</h1>
+        <p class="page-subtitle">Share your thoughts on a movie you've watched.</p>
+
+        <!-- Review Form -->
+        <form id="review-form" class="card" style="max-width: 600px;">
+            <div class="form-group">
+                <label for="movie-select">Movie</label>
+                <select id="movie-select" required>
+                    <option value="">— Select a movie —</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="user-select">Your Name</label>
+                <select id="user-select" required>
+                    <option value="">— Select your user —</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rating-input">Rating (1–10)</label>
+                <input type="number" id="rating-input" min="1" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="review-text">Review</label>
+                <textarea id="review-text" placeholder="Write your review..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+            <p id="form-message" class="mt-1 text-muted"></p>
+        </form>
+
+        <!-- Recent Reviews -->
+        <section class="mt-3">
+            <h2>Recent Reviews</h2>
+            <div id="reviews-list" class="mt-2">
+                <!-- Reviews rendered by JS -->
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../js/loadInserts.js"></script>
+    <script type="module" src="../../js/pages/reviews/index.js"></script>
+</body>
+</html>

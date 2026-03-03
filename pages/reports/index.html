@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports | MovieDB</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <h1 class="page-title">Reports</h1>
+        <p class="page-subtitle">Aggregated stats and insights from the movie database.</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>Top-Rated Movies</h3>
+                <p class="text-muted mb-2">Movies with the highest average review score.</p>
+                <div id="report-top-rated">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Most Watchlisted</h3>
+                <p class="text-muted mb-2">Movies that appear on the most watchlists.</p>
+                <div id="report-most-watchlisted">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Genre Breakdown</h3>
+                <p class="text-muted mb-2">Number of movies per genre.</p>
+                <div id="report-genre-breakdown">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Most Active Reviewers</h3>
+                <p class="text-muted mb-2">Users who have left the most reviews.</p>
+                <div id="report-active-reviewers">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../js/loadInserts.js"></script>
+    <script type="module" src="../../js/pages/reports/index.js"></script>
+</body>
+</html>

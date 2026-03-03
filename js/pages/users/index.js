@@ -60,12 +60,12 @@ async function init() {
     const [revRes, wlRes] = await Promise.all([
         supabase
             .from('reviews')
-            .select('*, movies(title, movie_id)')
+            .select('*, movies(title, movie_id, poster_url)')
             .eq('user_id', user.user_id)
             .order('review_date', { ascending: false }),
         supabase
             .from('watchlist')
-            .select('*, movies(title, movie_id)')
+            .select('*, movies(title, movie_id, poster_url)')
             .eq('user_id', user.user_id)
             .order('date_added', { ascending: false }),
     ]);
@@ -93,13 +93,18 @@ async function init() {
         revList.innerHTML = '<p class="text-slate-400">This user hasn\'t written any reviews.</p>';
     } else {
         revList.innerHTML = reviews.map(r => `
-            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5">
-                <div class="flex items-center justify-between mb-2">
-                    <a href="${base}/pages/movies/detail.html?id=${r.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300 font-medium">${esc(r.movies?.title)}</a>
-                    <span class="text-yellow-400 font-semibold">${r.rating}/10</span>
+            <div class="bg-slate-800 border border-slate-700 rounded-lg p-5 flex gap-4">
+                ${r.movies?.poster_url
+                    ? `<a href="${base}/pages/movies/detail.html?id=${r.movies?.movie_id}" class="shrink-0"><img src="${esc(r.movies.poster_url)}" alt="${esc(r.movies?.title)} poster" class="w-16 h-24 object-cover rounded" loading="lazy" onerror="this.remove()"></a>`
+                    : ''}
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between mb-2">
+                        <a href="${base}/pages/movies/detail.html?id=${r.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300 font-medium">${esc(r.movies?.title)}</a>
+                        <span class="text-yellow-400 font-semibold">${r.rating}/10</span>
+                    </div>
+                    <p class="text-sm text-slate-300">${esc(r.review_text)}</p>
+                    <small class="text-slate-500 mt-2 block">${esc(r.review_date)}</small>
                 </div>
-                <p class="text-sm text-slate-300">${esc(r.review_text)}</p>
-                <small class="text-slate-500 mt-2 block">${esc(r.review_date)}</small>
             </div>
         `).join('');
     }
@@ -115,7 +120,10 @@ async function init() {
         wlBody.innerHTML = watchlist.map(w => `
             <tr class="border-b border-slate-700">
                 <td class="px-4 py-3">
-                    <a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a>
+                    <div class="flex items-center gap-3">
+                        ${w.movies?.poster_url ? `<img src="${esc(w.movies.poster_url)}" alt="" class="w-8 h-12 object-cover rounded shrink-0" loading="lazy" onerror="this.remove()">` : ''}
+                        <a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a>
+                    </div>
                 </td>
                 <td class="px-4 py-3 text-slate-400">${esc(w.date_added)}</td>
                 <td class="px-4 py-3">${w.watched

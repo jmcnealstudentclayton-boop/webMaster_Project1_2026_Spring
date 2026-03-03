@@ -33,10 +33,16 @@ async function init() {
     }
 
     grid.innerHTML = movies.map(m => `
-        <a href="pages/movies/detail.html?id=${m.movie_id}" class="bg-slate-800 border border-slate-700 rounded-lg p-5 hover:border-indigo-500 transition-colors block no-underline text-inherit card-lift animate-fade-in">
-            <h3 class="text-lg font-semibold">${esc(m.title)}</h3>
-            <p class="text-slate-400 text-sm">${esc(String(m.release_year ?? ''))}</p>
-            <p class="mt-2 text-sm">${esc((m.description ?? '').substring(0, 120))}${(m.description?.length ?? 0) > 120 ? '…' : ''}</p>
+        <a href="pages/movies/detail.html?id=${m.movie_id}" class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden hover:border-indigo-500 transition-colors block no-underline text-inherit card-lift animate-fade-in">
+            ${m.poster_url
+                ? `<img src="${esc(m.poster_url)}" alt="${esc(m.title)} poster" class="w-full h-72 object-cover" loading="lazy" onerror="this.parentElement.querySelector('.poster-ph').classList.remove('hidden');this.remove()">`
+                : ''}
+            <div class="poster-ph ${m.poster_url ? 'hidden' : ''} w-full h-72 bg-slate-700 flex items-center justify-center text-slate-500 text-5xl">🎬</div>
+            <div class="p-5">
+                <h3 class="text-lg font-semibold">${esc(m.title)}</h3>
+                <p class="text-slate-400 text-sm">${esc(String(m.release_year ?? ''))}</p>
+                <p class="mt-2 text-sm text-slate-300">${esc((m.description ?? '').substring(0, 120))}${(m.description?.length ?? 0) > 120 ? '…' : ''}</p>
+            </div>
         </a>
     `).join('');
 }

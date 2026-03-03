@@ -53,12 +53,25 @@ async function init() {
     /* ── Render header ──────────────────────────── */
     document.title = `${movie.title} | MovieDB`;
     document.getElementById('movie-title').textContent = movie.title;
-    document.getElementById('movie-meta').textContent =
-        `${movie.release_year ?? 'Unknown year'} · ${movie.runtime ?? '?'} min`;
+    const metaParts = [`${movie.release_year ?? 'Unknown year'}`, `${movie.runtime ?? '?'} min`];
+    if (movie.rated) metaParts.push(movie.rated);
+    if (movie.director) metaParts.push(`Dir: ${movie.director}`);
+    if (movie.imdb_rating) metaParts.push(`⭐ ${movie.imdb_rating}/10 IMDb`);
+    document.getElementById('movie-meta').textContent = metaParts.join(' · ');
     document.getElementById('movie-desc').textContent = movie.description ?? '';
     document.getElementById('movie-genres').innerHTML = genres.length
         ? genres.map(g => `<span class="px-2 py-0.5 bg-indigo-500/20 text-indigo-300 text-xs rounded-full">${esc(g)}</span>`).join('')
         : '';
+
+    /* ── Show poster if available ───────────────── */
+    const posterWrap = document.getElementById('movie-poster-wrap');
+    const posterImg  = document.getElementById('movie-poster');
+    if (movie.poster_url && posterWrap && posterImg) {
+        posterImg.src = movie.poster_url;
+        posterImg.alt = `${movie.title} poster`;
+        posterWrap.classList.remove('hidden');
+        posterImg.onerror = () => posterWrap.classList.add('hidden');
+    }
 
     spinner.classList.add('hidden');
     header.classList.remove('hidden');

@@ -21,11 +21,16 @@
         </div>
 
         <!-- Movie header (filled by JS) -->
-        <div id="movie-header" class="hidden mb-8">
-            <h1 id="movie-title" class="text-3xl font-bold mb-1"></h1>
-            <p id="movie-meta" class="text-slate-400 mb-2"></p>
-            <div id="movie-genres" class="flex flex-wrap gap-2 mb-4"></div>
-            <p id="movie-desc" class="text-slate-300 leading-relaxed max-w-3xl"></p>
+        <div id="movie-header" class="hidden mb-8 flex flex-col sm:flex-row gap-6">
+            <div id="movie-poster-wrap" class="hidden shrink-0">
+                <img id="movie-poster" class="rounded-lg w-48 shadow-lg" alt="">
+            </div>
+            <div>
+                <h1 id="movie-title" class="text-3xl font-bold mb-1"></h1>
+                <p id="movie-meta" class="text-slate-400 mb-2"></p>
+                <div id="movie-genres" class="flex flex-wrap gap-2 mb-4"></div>
+                <p id="movie-desc" class="text-slate-300 leading-relaxed max-w-3xl"></p>
+            </div>
         </div>
 
         <!-- Reviews section -->

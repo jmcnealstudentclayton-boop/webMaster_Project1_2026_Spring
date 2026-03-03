@@ -47,7 +47,7 @@ export async function loadWatchlist() {
 
     let req = supabase
         .from('watchlist')
-        .select('*, movies(title, movie_id), users(first_name, last_name, user_id)', { count: 'exact' })
+        .select('*, movies(title, movie_id, poster_url), users(first_name, last_name, user_id)', { count: 'exact' })
         .order('date_added', { ascending: false })
         .limit(100);
 
@@ -77,7 +77,12 @@ export async function loadWatchlist() {
     tbody.innerHTML = data.map(w => `
         <tr class="border-b border-slate-700">
             <td class="px-4 py-3"><a href="${base}/pages/users/?id=${w.users?.user_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.users?.first_name + ' ' + w.users?.last_name)}</a></td>
-            <td class="px-4 py-3"><a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a></td>
+            <td class="px-4 py-3">
+                <div class="flex items-center gap-3">
+                    ${w.movies?.poster_url ? `<img src="${esc(w.movies.poster_url)}" alt="" class="w-8 h-12 object-cover rounded shrink-0" loading="lazy" onerror="this.remove()">` : ''}
+                    <a href="${base}/pages/movies/detail.html?id=${w.movies?.movie_id}" class="text-indigo-400 hover:text-indigo-300">${esc(w.movies?.title)}</a>
+                </div>
+            </td>
             <td class="px-4 py-3 text-slate-400">${esc(w.date_added)}</td>
             <td class="px-4 py-3">${w.watched ? '<span class="text-green-400">✔ Watched</span>' : '<span class="text-slate-400">Pending</span>'}</td>
         </tr>

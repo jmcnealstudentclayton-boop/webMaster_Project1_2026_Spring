@@ -11,50 +11,39 @@
     <div id="nav-placeholder"></div>
 
     <main class="flex-1 max-w-6xl w-full mx-auto px-6 py-8">
-        <h1 class="text-3xl font-bold mb-2">My Watchlist</h1>
-        <p class="text-slate-400 mb-6">Manage the movies you want to watch.</p>
+        <h1 class="text-3xl font-bold mb-2">Watchlist</h1>
+        <p class="text-slate-400 mb-6">Browse all user watchlist entries.</p>
 
-        <!-- Add to watchlist -->
-        <form id="watchlist-form" class="bg-slate-800 border border-slate-700 rounded-lg p-6 max-w-xl">
-            <div class="mb-4">
-                <label for="wl-user-select" class="block text-sm text-slate-400 mb-1">User</label>
-                <select id="wl-user-select" required
-                        class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
-                    <option value="">— Select your user —</option>
-                </select>
-            </div>
+        <!-- Filter bar -->
+        <div class="flex flex-wrap gap-4 mb-6">
+            <select id="wl-user-filter"
+                    class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
+                <option value="">All Users</option>
+            </select>
+            <select id="wl-status-filter"
+                    class="px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
+                <option value="">All Statuses</option>
+                <option value="watched">Watched</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
 
-            <div class="mb-4">
-                <label for="wl-movie-select" class="block text-sm text-slate-400 mb-1">Movie</label>
-                <select id="wl-movie-select" required
-                        class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30">
-                    <option value="">— Select a movie —</option>
-                </select>
-            </div>
-
-            <button type="submit" class="px-5 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors cursor-pointer">Add to Watchlist</button>
-            <p id="wl-message" class="mt-2 text-slate-400 text-sm"></p>
-        </form>
-
-        <!-- Current Watchlist -->
-        <section class="mt-10">
-            <h2 class="text-2xl font-bold mb-4">Current Watchlist</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full border-collapse">
-                    <thead>
-                        <tr>
-                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Movie</th>
-                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Added</th>
-                            <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Status</th>
-                            <th class="px-4 py-3 border-b border-slate-700"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="watchlist-body">
-                        <!-- Rows rendered by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        <!-- Watchlist Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">User</th>
+                        <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Movie</th>
+                        <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Added</th>
+                        <th class="text-left px-4 py-3 text-xs uppercase tracking-wide text-slate-400 border-b border-slate-700">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="watchlist-body">
+                    <!-- Rows rendered by JS -->
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <div id="footer-placeholder"></div>

@@ -2,13 +2,16 @@
 
 > **Course:** ITFN 2214 — Webmaster Group Project  
 > **Semester:** Spring 2026  
-> **Stack:** HTML / CSS / Vanilla JS + Supabase (PostgreSQL)  
+> **Stack:** HTML / Tailwind CSS / Vanilla JS + Supabase (PostgreSQL)  
 > **Repo:** `jmcnealstudentclayton-boop/webMaster_Project1_2026_Spring`  
 > **Live:** <https://jmcnealstudentclayton-boop.github.io/webMaster_Project1_2026_Spring/>
 
 ---
 
-## Database Schema (Supabase)
+## Database Schema (Supabase) — READ-ONLY
+
+> **⚠️ RULE: The database cannot be modified.** No new tables, no inserts, no updates, no deletes.  
+> The website must work entirely with the existing dataset as provided.
 
 | Table          | Rows  | Description                          |
 |----------------|-------|--------------------------------------|
@@ -66,28 +69,28 @@ ROOT/
 | 3  | MySQL → Supabase migration (6 tables)         | ✅ Done |
 | 4  | Folder structure & page shells created         | ✅ Done |
 | 5  | Global nav & footer page inserts               | ✅ Done |
-| 6  | Base CSS with dark theme & responsive layout   | ✅ Done |
+| 6  | Tailwind CSS with dark theme & responsive layout| ✅ Done |
 | 7  | Home page with featured movies grid            | ✅ Done |
 | 8  | Browse Movies page with search                 | ✅ Done |
 | 9  | Reviews page layout (form + recent reviews)    | ✅ Done |
 | 10 | Watchlist page layout (form + table)           | ✅ Done |
 | 11 | Reports page layout (4 report cards)           | ✅ Done |
 
-### Milestone 2 — User Input & Validation  *(Due: April 5)*
+### Milestone 2 — Interactivity & Filtering  *(Due: April 5)*
 
 | #  | Task                                          | Status      |
 |----|-----------------------------------------------|-------------|
-| 12 | Client-side form validation (reviews)          | 🔲 To Do    |
-| 13 | Client-side form validation (watchlist)        | 🔲 To Do    |
-| 14 | Duplicate review prevention                    | 🔲 To Do    |
-| 15 | Duplicate watchlist entry prevention            | 🔲 To Do    |
-| 16 | Input sanitization / XSS protection            | 🔲 To Do    |
-| 17 | Success / error toast notifications             | 🔲 To Do    |
+| 12 | Pagination for movie browse                    | 🔲 To Do    |
+| 13 | Genre filter dropdown on movies page            | 🔲 To Do    |
+| 14 | Sort movies by title / year / runtime           | 🔲 To Do    |
+| 15 | Search reviews by movie title or username       | 🔲 To Do    |
+| 16 | Pagination for reviews list                     | 🔲 To Do    |
+| 17 | Filter watchlist by watched / pending status    | 🔲 To Do    |
 | 18 | Loading spinners during async operations        | 🔲 To Do    |
-| 19 | Pagination for movie browse & reviews           | 🔲 To Do    |
-| 20 | Genre filter dropdown on movies page            | 🔲 To Do    |
+| 19 | XSS-safe rendering (escape user content)        | 🔲 To Do    |
+| 20 | Toast / inline notifications for empty results  | 🔲 To Do    |
 
-### Milestone 3 — Database Integration & Polish  *(Due: May 4)*
+### Milestone 3 — Reports, Detail Views & Polish  *(Due: May 4)*
 
 | #  | Task                                          | Status      |
 |----|-----------------------------------------------|-------------|
@@ -95,17 +98,19 @@ ROOT/
 | 22 | Most-Watchlisted report (live data)             | 🔲 To Do    |
 | 23 | Genre Breakdown report (live data)              | 🔲 To Do    |
 | 24 | Most Active Reviewers report (live data)        | 🔲 To Do    |
-| 25 | Mark movie as "watched" in watchlist            | 🔲 To Do    |
-| 26 | Sort / filter options on watchlist table        | 🔲 To Do    |
-| 27 | Movie detail page (all reviews for one movie)  | 🔲 To Do    |
-| 28 | Supabase Row-Level Security (RLS) policies     | 🔲 To Do    |
-| 29 | Final styling pass & accessibility review       | 🔲 To Do    |
+| 25 | Movie detail page (all reviews for one movie)  | 🔲 To Do    |
+| 26 | User profile page (reviews + watchlist)         | 🔲 To Do    |
+| 27 | Responsive polish & mobile nav                  | 🔲 To Do    |
+| 28 | Accessibility review (ARIA, contrast, focus)    | 🔲 To Do    |
+| 29 | Final styling pass & animations                 | 🔲 To Do    |
 | 30 | README with setup instructions                  | 🔲 To Do    |
 
 ---
 
-## Notes
+## Rules & Notes
 
+- **⚠️ Database is READ-ONLY** — no inserts, updates, deletes, new tables, or schema changes allowed. The site displays the existing dataset only.
 - **No PHP** — using Supabase JS client directly from the browser via ESM imports from `esm.sh`.
-- **GitHub Pages** serves the site statically; all data comes from Supabase REST API.
-- Supabase anon key is safe to expose in client code (read-only by default; writes controlled by RLS).
+- **Tailwind CSS** via CDN for all styling.
+- **GitHub Pages** serves the site statically; all data comes from Supabase REST API (read-only queries).
+- All "forms" on the site are for **filtering/searching** the existing data, not for writing to the database.
